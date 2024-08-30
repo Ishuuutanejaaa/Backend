@@ -1,0 +1,411 @@
+*db.User.countDocuments({name:”leen”}):*  Count no. of documents with specific name.
+
+*db.User.estimatedDocumentCount():*  It will give you total number of documents inside a collection
+
+*Query Parameters:* 
+
+*db.User.updateMany({},{$set:{subject:"data-science"}}):*  If already exist it updates If doesn’t exist it creates.
+
+*db.User.updateMany({marks:{$gte:90,$lte:100}},{$set: {Grade:"C"}}):* Here we use query operators like $gte and $lte for filter.
+
+*Some Other Examples:*
+
+1.db.User.find({age:{$eq:25},marks:{$eq:88}})
+
+2.db.User.find({age:{$gte:22},marks:{$gte:90}})
+
+3.db.User.find({Grade:{$eq:"A"}})
+
+Example of AND: db.User.find({$and:[{age:25},{marks:88}]})
+
+OR: db.User.find({$or:[{age:25},{marks:22}]})
+
+NOT: db.User.find({age:{$not:{$eq:22}}})
+
+NOR: db.User.find({$nor:[{age:25},{marks:22}]})
+
+*Element*
+
+1.$exists: db.User.find({Grade:{$exists:true}})
+
+2:$type:  db.User.find({address:{$type:'string'}})
+
+
+
+
+Command Prompt 
+
+Microsoft Windows [Version 10.0.22631.4037]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\ISHIKA>mongosh
+Current Mongosh Log ID: 66d1412b911154e9992710bb
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.3.0
+Using MongoDB:          7.0.14
+Using Mongosh:          2.3.0
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2024-08-28T10:09:00.341+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> use newdb
+switched to db newdb
+newdb> show collections
+dbcollect
+Faculty
+user
+newdb> db.user.insertOne({name:"ishi" , age:20, class:"g8"})
+{
+  acknowledged: true,
+  insertedId: ObjectId('66d14349911154e9992710bc')
+}
+newdb> db.user.countDocuments({name:"ishi"})
+2
+newdb> db.user.estimatedDocumentCount()
+5
+newdb> db.user.updateMany({},{$set:{subject:"data-science"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+newdb> db.user.updateMany({},{$set:{address:"Chitkara University"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+newdb> db.user.updateMany({marks:{$gte:80,$lte:90}},{$set:{Grade:"A"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+newdb> db.user.updateMany({age:{$gte:18,$lte:20}},{$set:{Grade:"A"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 2,
+  modifiedCount: 2,
+  upsertedCount: 0
+}
+newdb> db.user.find({age:{$eq:19},Marks:{$eq:68}})
+
+newdb> db.user.find({age:{$eq:19},Marks:{$eq:"68"}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
+newdb> db.user.find({age:{$gte:19},Marks:{$gte:"68"}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c1'),
+    name: 'Bob',
+    age: 30,
+    city: 'Los Angeles',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'C',
+    Marks: '87'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 20,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '89'
+  }
+]
+newdb> db.user.find({Grade:{$eq:"A"}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c2'),
+    name: 'Charlie',
+    age: 28,
+    city: 'Chicago',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '67'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 20,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '89'
+  }
+]
+newdb> db.user.find({$and:[{age:19},{Marks:"90"}]})
+
+newdb> db.user.find({$and:[{age:19},{Marks:"68"}]})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
+newdb> db.user.find({$or:[{age:19},{Marks:"68"}]})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c0'),
+    name: 'Alice',
+    age: 19,
+    city: 'New York',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    ' Marks': '90',
+    Grade: 'B'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c2'),
+    name: 'Charlie',
+    age: 28,
+    city: 'Chicago',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
+newdb> db.user.find({age:{$not:{$eq:30}}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c0'),
+    name: 'Alice',
+    age: 19,
+    city: 'New York',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    ' Marks': '90',
+    Grade: 'B'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c2'),
+    name: 'Charlie',
+    age: 28,
+    city: 'Chicago',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
+newdb> db.user.find({$nor:[{age:19},{Marks:"68"}]})
+[
+  {
+    _id: ObjectId('66cebd637994364e222710c1'),
+    name: 'Bob',
+    age: 30,
+    city: 'Los Angeles',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'C',
+    Marks: '87'
+  }
+]
+newdb> db.user.find({Grade:{$exists:true}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c0'),
+    name: 'Alice',
+    age: 19,
+    city: 'New York',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    ' Marks': '90',
+    Grade: 'B'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c1'),
+    name: 'Bob',
+    age: 30,
+    city: 'Los Angeles',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'C',
+    Marks: '87'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c2'),
+    name: 'Charlie',
+    age: 28,
+    city: 'Chicago',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
+newdb> db.user.find({age:{$type:"int"}})
+[
+  {
+    _id: ObjectId('66cebaf77994364e222710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g9',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c0'),
+    name: 'Alice',
+    age: 19,
+    city: 'New York',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    ' Marks': '90',
+    Grade: 'B'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c1'),
+    name: 'Bob',
+    age: 30,
+    city: 'Los Angeles',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'C',
+    Marks: '87'
+  },
+  {
+    _id: ObjectId('66cebd637994364e222710c2'),
+    name: 'Charlie',
+    age: 28,
+    city: 'Chicago',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  },
+  {
+    _id: ObjectId('66d14349911154e9992710bc'),
+    name: 'ishi',
+    age: 19,
+    class: 'g8',
+    subject: 'data-science',
+    address: 'Chitkara University',
+    Grade: 'A',
+    Marks: '68'
+  }
+]
