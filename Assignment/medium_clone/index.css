@@ -1,0 +1,218 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: rgb(245, 245, 237);
+    font-family: Arial, sans-serif;
+}
+
+/* NavBar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    border-bottom: 1px solid black;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo a {
+    font-size: 2rem;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    margin-left: 20px;
+}
+
+.nav-links {
+    margin-right: 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 10px;
+}
+
+.nav-links a {
+    font-size: 1rem;
+    text-decoration: none;
+    color: black;
+    padding: 5px 10px;
+}
+
+.nav-links .btn {
+    background-color: black;
+    color: white;
+    border-radius: 25px;
+    padding: 8px 16px;
+    font-weight: bold;
+}
+
+/* Main Content Styling */
+.main_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    height: calc(70vh - 80px); /* Adjust height to prevent footer overlap */
+    margin-top: 80px;
+    padding-bottom: 60px; /* Adds padding to the bottom to avoid overlap with footer */
+}
+
+.text-container {
+    max-width: 50%;
+    margin-left: 20px;
+}
+
+h1 {
+    font-size: 3.5rem;
+    color: black;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+    color: black;
+}
+
+.btn {
+    background-color: black;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block; /* Ensures button is displayed as a block-level element */
+    margin-top: 10px; /* Adds margin above the button to separate it from the text */
+}
+
+.image-container {
+    position: relative;
+}
+
+.flower {
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Footer styling */
+.footer {
+    padding: 5px 0; /* Reduced padding to minimize footer height */
+    border-top: 1px solid black;
+    text-align: center;
+    background-color: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 5px;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 5px;
+}
+
+.footer-links a {
+    font-size: 12px;
+    text-decoration: none;
+    color: darkgray;
+}
+
+/* Responsive Design for Tablets and Mobile */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .logo a {
+        margin-left: 0;
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        margin: 10px 0;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .nav-links li {
+        margin: 5px 0;
+    }
+
+    .main_content {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        height: auto;
+    }
+
+    .text-container {
+        max-width: 80%;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    p {
+        font-size: 1rem;
+    }
+
+    .flower {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* Responsive Design for Small Mobile Devices */
+@media (max-width: 480px) {
+    .navbar {
+        padding: 5px;
+    }
+
+    .logo a {
+        font-size: 1.5rem;
+    }
+
+    .nav-links {
+        font-size: 0.9rem;
+    }
+
+    .text-container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    .footer-links a {
+        font-size: 10px;
+    }
+}
